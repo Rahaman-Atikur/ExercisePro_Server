@@ -2,6 +2,11 @@
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://atikurukrahaman_db_user:9DRCqaNpqrBllirm@cluster0.laa2pcw.mongodb.net/?appName=Cluster0";
 
+const express = require('express');
+const app = express();
+const port = 3000;
+
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -13,13 +18,18 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     const gymSchedule = client.db('gym-schedule').collection('schedule');
-    app.post('/schedule',(req,res)=>{
-        console.log(req);
+    app.post('/schedule',async (req,res)=>{
+
+       const data = req.body;
+       const result = await gymSchedule.insertOne(data);
+       res.send({message:"data inserted successfully", data: result});
     })
-    
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
-  } finally {
-    
+  } 
+
+
+
+  finally {
     await client.close();
   }
 }
