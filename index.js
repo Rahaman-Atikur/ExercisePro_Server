@@ -1,12 +1,8 @@
-
 const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://atikurukrahaman_db_user:9DRCqaNpqrBllirm@cluster0.laa2pcw.mongodb.net/?appName=Cluster0";
-
 const express = require('express');
 const app = express();
 const port = 3000;
-
-
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
@@ -14,7 +10,6 @@ const client = new MongoClient(uri, {
     deprecationErrors: true,
   }
 });
-
 async function run() {
   try {
     const gymSchedule = client.db('gym-schedule').collection('schedule');
@@ -26,9 +21,6 @@ async function run() {
     })
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } 
-
-
-
   finally {
     await client.close();
   }
