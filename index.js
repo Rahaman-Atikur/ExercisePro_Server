@@ -10,6 +10,7 @@ const port = 3000;
 
 app.use(express.json());
 app.use(cors());
+
 const client = new MongoClient(uri, {
   serverApi: {
     version: ServerApiVersion.v1,
